@@ -1,0 +1,44 @@
+﻿@page
+@model IndexModel
+@{
+	ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+	@{
+		if (TempData.Peek("Offers") != null)
+		{
+			<p>XML data is loaded successfully.</p>
+			<p>Click the button below to: find offer with Id = 12344, display it and add to database.</p>
+		}
+	}
+
+	@{
+		if (Model.Offer != null)
+		{
+			<div class="container">
+				<div class="row">
+					<div class="col-9 text-start">
+						<p class="mb-0">@Model.Offer.Artist</p>
+						<p class="lead">@Model.Offer.Title</p>
+						<p><strong>ID:</strong> @Model.Offer.Id</p>
+						<p><strong>Available:</strong> @Model.Offer.IsAvailable</p>
+						<p><strong>Url:</strong> <a href="@Model.Offer.Url">@Model.Offer.Url</a></p>
+						<p><strong>Year:</strong> @Model.Offer.Year</p>
+						<p>@Model.Offer.Description</p>
+					</div>
+					<div class="col">
+						<img class="img-thumbnail" src="~/The_Dark_Side_of_the_Moon.jpg" />
+					</div>
+				</div>
+			</div>
+		}
+	}
+
+	<form method="post">
+		<button class="btn btn-primary" type="submit">Add to DB</button>
+	</form>
+
+	<div class="m-3 p-1 alert alert-danger" asp-validation-summary="ModelOnly"></div>
+</div>
